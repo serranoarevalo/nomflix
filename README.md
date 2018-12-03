@@ -16,5 +16,5 @@ Find it [Here](https://academy.nomadcoders.co/p/react-for-beginners)
 ## Screens
 
 - [ ] Home
-- [ ] Movie Detail
-- [ ] Search Movie
+- [ ] Movie / Show Detail
+- [ ] Search Movies / TV Shows
