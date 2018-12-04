@@ -11,7 +11,6 @@ export const movies = {
   getPopular: () => api.get("movie/popular"),
   getUpcoming: () => api.get("movie/upcoming"),
   getNowPlaying: () => api.get("movie/now_playing"),
-  getPopularMovies: () => api.get("movie/popular"),
   searchMovies: term =>
     api.get("search/movie", {
       params: {

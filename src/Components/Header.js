@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 const Header = styled.nav`
   background-color: rgba(0, 0, 0, 0.9);
-  padding: 0px 20px;
   padding-top: 15px;
   display: flex;
   position: fixed;
