@@ -1,10 +1,10 @@
 import React from "react";
-import SearchPresenter from "./SearchPresenter";
+import TVPresenter from "./TVPresenter";
 import { tv } from "../../api";
 
 export default class extends React.Component {
   state = {
-    loading: false,
+    loading: true,
     error: null,
     popular: [],
     topRated: [],
@@ -41,7 +41,7 @@ export default class extends React.Component {
   render() {
     const { loading, error, popular, topRated, airingToday } = this.state;
     return (
-      <SearchPresenter
+      <TVPresenter
         loading={loading}
         error={error}
         popular={popular}

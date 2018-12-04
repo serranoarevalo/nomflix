@@ -4,7 +4,7 @@ import { movies } from "../../api";
 
 export default class extends React.Component {
   state = {
-    loading: false,
+    loading: true,
     error: null,
     popular: [],
     upcoming: [],

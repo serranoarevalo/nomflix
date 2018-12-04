@@ -48,9 +48,6 @@ export default class extends React.Component {
       this.setState({ loading: false });
     }
   };
-  componentDidMount() {
-    this.search("stuff");
-  }
 
   render() {
     const {
@@ -60,7 +57,7 @@ export default class extends React.Component {
       showResults,
       searchingBy
     } = this.state;
-    console.log(this.state);
+
     return (
       <SearchPresenter
         loading={loading}
