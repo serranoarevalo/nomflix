@@ -6,7 +6,7 @@ export default class extends React.Component {
   state = {
     loading: true,
     result: null,
-    error: ""
+    error: null
   };
 
   componentDidMount = () => {

@@ -6,9 +6,9 @@ export default class extends React.Component {
   state = {
     loading: true,
     error: null,
-    popular: [],
-    upcoming: [],
-    nowPlaying: []
+    popular: null,
+    upcoming: null,
+    nowPlaying: null
   };
 
   componentDidMount = async () => {
