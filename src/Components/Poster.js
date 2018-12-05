@@ -71,10 +71,8 @@ const Year = styled.span`
   color: rgba(255, 255, 255, 0.5);
 `;
 
-const DataColumn = styled.div``;
-
-const Poster = ({ imageUrl, rating, name, year, seasons, id }) => (
-  <Link to={seasons ? `/show/${id}` : `/movie/${id}`}>
+const Poster = ({ imageUrl, rating, name, year, isTv, id }) => (
+  <Link to={isTv ? `/show/${id}` : `/movie/${id}`}>
     <Container>
       <ImageContainer>
         <Image bgImage={`https://image.tmdb.org/t/p/w500${imageUrl}`} />
@@ -87,16 +85,8 @@ const Poster = ({ imageUrl, rating, name, year, seasons, id }) => (
       </ImageContainer>
 
       <Name>{name.length > 18 ? `${name.substring(0, 18)}...` : name}</Name>
-      <Data>
-        <DataColumn>
-          <Year>{year}</Year>
-        </DataColumn>
-        {seasons && (
-          <DataColumn>
-            {seasons === 1 ? "1 season" : `${seasons} seasons.`}
-          </DataColumn>
-        )}
-      </Data>
+
+      <Year>{year}</Year>
     </Container>
   </Link>
 );
@@ -107,7 +97,7 @@ Poster.propTypes = {
   rating: PropTypes.number,
   name: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
-  seasons: PropTypes.string
+  isTv: PropTypes.bool.isRequired
 };
 
 export default Poster;

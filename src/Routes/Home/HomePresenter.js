@@ -41,7 +41,7 @@ const HomePresenter = ({ loading, error, popular, upcoming, nowPlaying }) =>
                 rating={movie.vote_average}
                 name={movie.title}
                 year={movie.release_date.substring(0, 4)}
-                seasons={null}
+                isTv={false}
                 id={movie.id}
                 key={movie.id}
               />
@@ -59,7 +59,7 @@ const HomePresenter = ({ loading, error, popular, upcoming, nowPlaying }) =>
                 rating={movie.vote_average}
                 name={movie.title}
                 year={movie.release_date.substring(0, 4)}
-                seasons={null}
+                isTv={false}
                 id={movie.id}
                 key={movie.id}
               />
@@ -77,7 +77,7 @@ const HomePresenter = ({ loading, error, popular, upcoming, nowPlaying }) =>
                 rating={movie.vote_average}
                 name={movie.title}
                 year={movie.release_date.substring(0, 4)}
-                seasons={null}
+                isTv={false}
                 id={movie.id}
                 key={movie.id}
               />
