@@ -52,7 +52,9 @@ const Image = styled.div`
   }
 `;
 
-const Data = styled.div``;
+const Data = styled.div`
+  width: 100%;
+`;
 
 const Name = styled.span`
   color: rgba(255, 255, 255, 0.8);
@@ -84,9 +86,9 @@ const Poster = ({ imageUrl, rating, name, year, seasons, id }) => (
         </Votes>
       </ImageContainer>
 
+      <Name>{name.length > 18 ? `${name.substring(0, 18)}...` : name}</Name>
       <Data>
         <DataColumn>
-          <Name>{name}</Name>
           <Year>{year}</Year>
         </DataColumn>
         {seasons && (
