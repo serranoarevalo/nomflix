@@ -20,7 +20,8 @@ export default class extends React.Component {
     });
   };
 
-  handleSubmit = () => {
+  handleSubmit = e => {
+    e.preventDefault();
     const { searchingBy } = this.state;
     if (searchingBy !== "") {
       this.search(searchingBy);
@@ -65,6 +66,8 @@ export default class extends React.Component {
         movieResults={movieResults}
         showResults={showResults}
         searchingBy={searchingBy}
+        updateSearchingBy={this.updateSearchingBy}
+        handleSubmit={this.handleSubmit}
       />
     );
   }
