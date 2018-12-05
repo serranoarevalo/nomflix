@@ -75,7 +75,13 @@ const Poster = ({ imageUrl, rating, name, year, isTv, id }) => (
   <Link to={isTv ? `/show/${id}` : `/movie/${id}`}>
     <Container>
       <ImageContainer>
-        <Image bgImage={`https://image.tmdb.org/t/p/w500${imageUrl}`} />
+        <Image
+          bgImage={
+            imageUrl
+              ? `https://image.tmdb.org/t/p/w500${imageUrl}`
+              : require("../assets/noPoster.png")
+          }
+        />
         <Votes>
           <span role="img" aria-label="Stars">
             ⭐️
