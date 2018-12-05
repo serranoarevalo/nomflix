@@ -18,27 +18,29 @@ const Year = styled.span``;
 const DataColumn = styled.div``;
 
 const Poster = ({ imageUrl, rating, name, year, seasons, id }) => (
-  <Container>
-    <Image bgImage={imageUrl}>
-      <Votes>
-        <span role="img" aria-label="Stars">
-          ⭐️
-        </span>{" "}
-        {rating}/10
-      </Votes>
-    </Image>
-    <Data>
-      <DataColumn>
-        <Name>{name}</Name>
-        <Year>{year}</Year>
-      </DataColumn>
-      {seasons && (
+  <Link to={seasons ? `/show/${id}` : `/movie/${id}`}>
+    <Container>
+      <Image bgImage={imageUrl}>
+        <Votes>
+          <span role="img" aria-label="Stars">
+            ⭐️
+          </span>{" "}
+          {rating}/10
+        </Votes>
+      </Image>
+      <Data>
         <DataColumn>
-          {seasons === 1 ? "1 season" : `${seasons} seasons.`}
+          <Name>{name}</Name>
+          <Year>{year}</Year>
         </DataColumn>
-      )}
-    </Data>
-  </Container>
+        {seasons && (
+          <DataColumn>
+            {seasons === 1 ? "1 season" : `${seasons} seasons.`}
+          </DataColumn>
+        )}
+      </Data>
+    </Container>
+  </Link>
 );
 
 Poster.propTypes = {
