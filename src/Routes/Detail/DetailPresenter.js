@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Loading from "../../Components/Loading";
-import ErrorText from "../../Components/ErrorText";
+import Loading from "Components/Loading";
+import ErrorText from "Components/ErrorText";
+import YTLink from "Components/YTLink";
 
 const Container = styled.div`
   position: relative;
@@ -64,6 +65,7 @@ const Bullet = styled.span`
 
 const Overview = styled.p`
   margin-top: 20px;
+  margin-bottom: 25px;
   width: 50%;
   line-height: 2;
 `;
@@ -114,17 +116,27 @@ const DetailPresenter = ({ loading, result, error }) =>
             </InfoItem>
             <Bullet>•</Bullet>
             {result.status && <InfoItem>{result.status}</InfoItem>}
-            <Bullet>•</Bullet>
-            {result.vote_average && (
-              <InfoItem>
-                <span role="img" aria-label="rating">
-                  ⭐️
-                </span>{" "}
-                {result.vote_average} / 10
-              </InfoItem>
-            )}
+            {result.vote_average && result.vote_average !== 0 ? (
+              <>
+                <Bullet>•</Bullet>
+                <InfoItem>
+                  <span role="img" aria-label="rating">
+                    ⭐️
+                  </span>{" "}
+                  {result.vote_average} / 10
+                </InfoItem>
+              </>
+            ) : null}
           </InfoRow>
           {result.overview && <Overview>{result.overview}</Overview>}
+          {result.videos &&
+            result.videos.results &&
+            result.videos.results.map(
+              video =>
+                video.site === "YouTube" && (
+                  <YTLink title={video.name} id={video.key} key={video.id} />
+                )
+            )}
         </Data>
       </Content>
     </Container>

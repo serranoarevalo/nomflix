@@ -15,6 +15,21 @@ const Votes = styled.span`
   transition: opacity 0.3s ease-in-out;
 `;
 
+const Image = styled.div`
+  background-image: url(${props => props.bgImage});
+  background-size: cover;
+  background-position: center center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1;
+`;
+
 const ImageContainer = styled.div`
   position: relative;
   z-index: 2;
@@ -31,24 +46,9 @@ const ImageContainer = styled.div`
     ${Votes} {
       opacity: 1;
     }
-  }
-`;
-
-const Image = styled.div`
-  background-image: url(${props => props.bgImage});
-  background-size: cover;
-  background-position: center center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  border-radius: 5px;
-  box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.5);
-  transition: opacity 0.3s ease-in-out;
-  z-index: 1;
-  &:hover {
-    opacity: 0.3;
+    ${Image} {
+      opacity: 0.3;
+    }
   }
 `;
 
