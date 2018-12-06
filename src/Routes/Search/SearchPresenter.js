@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Loading from "Components/Loading";
 import Section from "Components/Section";
 import Poster from "Components/Poster";
+import ErrorText from "Components/ErrorText";
 
 const Container = styled.div`
   width: 100%;
@@ -82,6 +83,7 @@ const SearchPresenter = ({
         )}
       </>
     )}
+    {error && <ErrorText text={error} />}
   </Container>
 );
 

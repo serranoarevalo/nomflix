@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Loading from "Components/Loading";
 import Poster from "Components/Poster";
 import Section from "Components/Section";
+import ErrorText from "Components/ErrorText";
 
 const Container = styled.div`
   padding: 10px;
@@ -60,6 +61,7 @@ const HomePresenter = ({ loading, error, popular, topRated, airingToday }) =>
           ))}
         </Section>
       )}
+      {error && <ErrorText text={error} />}
     </Container>
   );
 
