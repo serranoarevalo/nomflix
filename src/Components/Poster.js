@@ -78,12 +78,14 @@ const Poster = ({ imageUrl, rating, name, year, isTv, id }) => (
               : require("../assets/noPoster.png")
           }
         />
-        <Votes>
-          <span role="img" aria-label="Stars">
-            ⭐️
-          </span>{" "}
-          {rating}/10
-        </Votes>
+        {rating > 0 ? (
+          <Votes>
+            <span role="img" aria-label="Stars">
+              ⭐️
+            </span>{" "}
+            {rating}/10
+          </Votes>
+        ) : null}
       </ImageContainer>
 
       <Name>{name.length > 18 ? `${name.substring(0, 18)}...` : name}</Name>
