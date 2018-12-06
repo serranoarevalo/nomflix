@@ -2,16 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Loading from "Components/Loading";
+import Section from "Components/Section";
+import Poster from "Components/Poster";
 
 const Container = styled.div`
   width: 100%;
   display: flex;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
   padding-top: 50px;
 `;
 
 const Form = styled.form`
   all: unset;
   width: 100%;
+  margin-bottom: 50px;
 `;
 
 const Input = styled.input`
@@ -20,7 +26,6 @@ const Input = styled.input`
   color: white;
   width: 100%;
   padding-bottom: 10px;
-  margin-left: 10px;
 `;
 
 const SearchPresenter = ({
@@ -41,7 +46,42 @@ const SearchPresenter = ({
         onChange={updateSearchingBy}
       />
     </Form>
-    {loading ? <Loading /> : null}
+    {loading ? (
+      <Loading />
+    ) : (
+      <>
+        {movieResults && (
+          <Section title="Movie Results">
+            {movieResults.map(movie => (
+              <Poster
+                imageUrl={movie.poster_path}
+                rating={movie.vote_average}
+                name={movie.title}
+                year={movie.release_date.substring(0, 4)}
+                isTv={false}
+                id={movie.id}
+                key={movie.id}
+              />
+            ))}
+          </Section>
+        )}
+        {showResults && (
+          <Section title="TV Show Results">
+            {showResults.map(show => (
+              <Poster
+                imageUrl={show.poster_path}
+                rating={show.vote_average}
+                name={show.original_name}
+                year={show.first_air_date.substring(0, 4)}
+                isTv={true}
+                id={show.id}
+                key={show.id}
+              />
+            ))}
+          </Section>
+        )}
+      </>
+    )}
   </Container>
 );
 

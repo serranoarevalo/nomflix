@@ -52,10 +52,6 @@ const Image = styled.div`
   }
 `;
 
-const Data = styled.div`
-  width: 100%;
-`;
-
 const Name = styled.span`
   color: rgba(255, 255, 255, 0.8);
   display: block;
@@ -99,7 +95,7 @@ const Poster = ({ imageUrl, rating, name, year, isTv, id }) => (
 
 Poster.propTypes = {
   id: PropTypes.number.isRequired,
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
   rating: PropTypes.number,
   name: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,

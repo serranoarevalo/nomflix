@@ -8,8 +8,8 @@ import {
 import Home from "Routes/Home";
 import TV from "Routes/TV";
 import Header from "./Header";
-import Search from "../Routes/Search";
-import Detail from "../Routes/Detail";
+import Search from "Routes/Search";
+import Detail from "Routes/Detail";
 
 export default () => (
   <Router>

@@ -41,6 +41,7 @@ export default class extends React.Component {
         movieResults,
         showResults
       });
+      console.log(movieResults);
     } catch {
       this.setState({
         error: "Can't search"

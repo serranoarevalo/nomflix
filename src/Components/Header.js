@@ -22,7 +22,7 @@ const Header = styled.nav`
 const NavLink = styled(Link)`
   color: white;
   border-bottom: ${props =>
-    props.selected ? "5px solid #3498db" : "5px solid transparent"};
+    props.selected ? "3px solid #3498db" : "3px solid transparent"};
   transition: border-bottom 0.5s ease-in-out;
   padding-bottom: 10px;
   width: 80px;
