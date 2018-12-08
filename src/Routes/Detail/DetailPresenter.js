@@ -8,12 +8,14 @@ import YTLink from "Components/YTLink";
 const Container = styled.div`
   position: relative;
   padding: 80px;
+  height: 100%;
+  width: 100%;
   height: calc(100vh - 45px);
 `;
 
 const Background = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url(${props => props.bgImage});
   background-size: 100%;
@@ -28,12 +30,12 @@ const Content = styled.div`
   position: relative;
   z-index: 9;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
+  overflow: scroll;
 `;
 
 const Poster = styled.div`
-  height: 100%;
   width: 30%;
   background-image: url(${props => props.bgImage});
   background-size: cover;
