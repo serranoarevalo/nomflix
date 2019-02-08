@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Loading from "Components/Loading";
-import Poster from "Components/Poster";
-import Section from "Components/Section";
-import ErrorText from "Components/ErrorText";
 import { movies } from "../../api";
+import HomePresenter from "./HomePresenter";
 
-const Container = styled.div`
-  padding: 10px;
-  padding-top: 30px;
-`;
-
-const Home = () => {
+export default () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState({
@@ -47,58 +38,13 @@ const Home = () => {
     getMovies();
   }, []);
 
-  return loading ? (
-    <Loading />
-  ) : (
-    <Container>
-      {data.popular && (
-        <Section title="Popular Movies">
-          {data.popular.map(movie => (
-            <Poster
-              imageUrl={movie.poster_path}
-              rating={movie.vote_average}
-              name={movie.title}
-              year={movie.release_date.substring(0, 4)}
-              isTv={false}
-              id={movie.id}
-              key={movie.id}
-            />
-          ))}
-        </Section>
-      )}
-      {data.upcoming && (
-        <Section title="Upcoming Movies">
-          {data.upcoming.map(movie => (
-            <Poster
-              imageUrl={movie.poster_path}
-              rating={movie.vote_average}
-              name={movie.title}
-              year={movie.release_date.substring(0, 4)}
-              isTv={false}
-              id={movie.id}
-              key={movie.id}
-            />
-          ))}
-        </Section>
-      )}
-      {data.nowPlaying && (
-        <Section title="Now Playing">
-          {data.nowPlaying.map(movie => (
-            <Poster
-              imageUrl={movie.poster_path}
-              rating={movie.vote_average}
-              name={movie.title}
-              year={movie.release_date.substring(0, 4)}
-              isTv={false}
-              id={movie.id}
-              key={movie.id}
-            />
-          ))}
-        </Section>
-      )}
-      {error && <ErrorText text={error} />}
-    </Container>
+  return (
+    <HomePresenter
+      loading={loading}
+      error={error}
+      popular={data.popular}
+      upcoming={data.upcoming}
+      nowPlaying={data.nowPlaying}
+    />
   );
 };
-
-export default Home;
