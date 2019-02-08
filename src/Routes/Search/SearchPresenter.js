@@ -34,17 +34,17 @@ const SearchPresenter = ({
   movieResults,
   showResults,
   searchingBy,
-  updateSearchingBy,
-  handleSubmit,
+  onSearchChange,
+  onSearchSubmit,
   error
 }) => (
   <Container>
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={onSearchSubmit}>
       <Input
         placeholder="Search for a Movie or TV Show"
         autoFocus={true}
         value={searchingBy}
-        onChange={updateSearchingBy}
+        onChange={onSearchChange}
       />
     </Form>
     {loading ? (
@@ -93,8 +93,8 @@ SearchPresenter.propTypes = {
   movieResults: PropTypes.array,
   showResults: PropTypes.array,
   error: PropTypes.string,
-  handleSubmit: PropTypes.func.isRequired,
-  updateSearchingBy: PropTypes.func.isRequired
+  onSearchChange: PropTypes.func.isRequired,
+  onSearchSubmit: PropTypes.func.isRequired
 };
 
 export default SearchPresenter;

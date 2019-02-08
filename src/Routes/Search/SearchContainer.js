@@ -1,35 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SearchPresenter from "./SearchPresenter";
 import { movies, tv } from "../../api";
 
-export default class extends React.Component {
-  state = {
-    loading: false,
+export default () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [searchingBy, setSearchingBy] = useState("");
+  const [data, setData] = useState({
     movieResults: null,
-    showResults: null,
-    searchingBy: "",
-    error: null
-  };
+    showResults: null
+  });
 
-  updateSearchingBy = event => {
+  const onSearchChange = event => {
     const {
       target: { value }
     } = event;
-    this.setState({
-      searchingBy: value
-    });
+    setSearchingBy(value);
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const { searchingBy } = this.state;
+  const onSearchSubmit = event => {
+    event.preventDefault();
     if (searchingBy !== "") {
-      this.search(searchingBy);
+      search(searchingBy);
     }
   };
 
-  search = async searchingBy => {
-    this.setState({ loading: true });
+  const search = async searchingBy => {
+    setLoading(true);
     try {
       const {
         data: { results: movieResults }
@@ -37,38 +34,26 @@ export default class extends React.Component {
       const {
         data: { results: showResults }
       } = await tv.searchTv(searchingBy);
-      this.setState({
+      setData({
         movieResults,
         showResults
       });
     } catch {
-      this.setState({
-        error: "Can't Search"
-      });
+      setError("Can't Search");
     } finally {
-      this.setState({ loading: false });
+      setLoading(false);
     }
   };
 
-  render() {
-    const {
-      loading,
-      error,
-      movieResults,
-      showResults,
-      searchingBy
-    } = this.state;
-
-    return (
-      <SearchPresenter
-        loading={loading}
-        error={error}
-        movieResults={movieResults}
-        showResults={showResults}
-        searchingBy={searchingBy}
-        updateSearchingBy={this.updateSearchingBy}
-        handleSubmit={this.handleSubmit}
-      />
-    );
-  }
-}
+  return (
+    <SearchPresenter
+      loading={loading}
+      error={error}
+      movieResults={data.movieResults}
+      showResults={data.showResults}
+      searchingBy={searchingBy}
+      onSearchChange={onSearchChange}
+      onSearchSubmit={onSearchSubmit}
+    />
+  );
+};
