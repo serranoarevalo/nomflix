@@ -1,17 +1,26 @@
-import React from "react";
-import HomePresenter from "./HomePresenter";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Loading from "Components/Loading";
+import Poster from "Components/Poster";
+import Section from "Components/Section";
+import ErrorText from "Components/ErrorText";
 import { movies } from "../../api";
 
-export default class extends React.Component {
-  state = {
-    loading: true,
-    error: null,
+const Container = styled.div`
+  padding: 10px;
+  padding-top: 30px;
+`;
+
+const Home = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState({
     popular: null,
     upcoming: null,
     nowPlaying: null
-  };
+  });
 
-  componentDidMount = async () => {
+  const getMovies = async () => {
     try {
       const {
         data: { results: popular }
@@ -22,33 +31,74 @@ export default class extends React.Component {
       const {
         data: { results: nowPlaying }
       } = await movies.getNowPlaying();
-
-      this.setState({
+      setData({
         popular,
         upcoming,
         nowPlaying
       });
     } catch {
-      this.setState({
-        error: "Could not get movies"
-      });
+      setError("Could not get movies");
     } finally {
-      this.setState({
-        loading: false
-      });
+      setLoading(false);
     }
   };
 
-  render() {
-    const { loading, error, popular, upcoming, nowPlaying } = this.state;
-    return (
-      <HomePresenter
-        loading={loading}
-        error={error}
-        popular={popular}
-        upcoming={upcoming}
-        nowPlaying={nowPlaying}
-      />
-    );
-  }
-}
+  useEffect(() => {
+    getMovies();
+  }, []);
+
+  return loading ? (
+    <Loading />
+  ) : (
+    <Container>
+      {data.popular && (
+        <Section title="Popular Movies">
+          {data.popular.map(movie => (
+            <Poster
+              imageUrl={movie.poster_path}
+              rating={movie.vote_average}
+              name={movie.title}
+              year={movie.release_date.substring(0, 4)}
+              isTv={false}
+              id={movie.id}
+              key={movie.id}
+            />
+          ))}
+        </Section>
+      )}
+      {data.upcoming && (
+        <Section title="Upcoming Movies">
+          {data.upcoming.map(movie => (
+            <Poster
+              imageUrl={movie.poster_path}
+              rating={movie.vote_average}
+              name={movie.title}
+              year={movie.release_date.substring(0, 4)}
+              isTv={false}
+              id={movie.id}
+              key={movie.id}
+            />
+          ))}
+        </Section>
+      )}
+      {data.nowPlaying && (
+        <Section title="Now Playing">
+          {data.nowPlaying.map(movie => (
+            <Poster
+              imageUrl={movie.poster_path}
+              rating={movie.vote_average}
+              name={movie.title}
+              year={movie.release_date.substring(0, 4)}
+              isTv={false}
+              id={movie.id}
+              key={movie.id}
+            />
+          ))}
+        </Section>
+      )}
+      {error && <ErrorText text={error} />}
+    </Container>
+  );
+};
+
+export default Home;
