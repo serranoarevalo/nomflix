@@ -51,7 +51,7 @@ const SearchPresenter = ({
       <Loading />
     ) : (
       <>
-        {movieResults && (
+        {movieResults && movieResults.length !== 0 && (
           <Section title="Movie Results">
             {movieResults.map(movie => (
               <Poster
@@ -66,7 +66,7 @@ const SearchPresenter = ({
             ))}
           </Section>
         )}
-        {showResults && (
+        {showResults && showResults.length !== 0 && (
           <Section title="TV Show Results">
             {showResults.map(show => (
               <Poster
@@ -84,6 +84,10 @@ const SearchPresenter = ({
       </>
     )}
     {error && <ErrorText text={error} />}
+    {movieResults &&
+      movieResults.length === 0 &&
+      showResults &&
+      showResults.length === 0 && <ErrorText text={"Nothing was found"} />}
   </Container>
 );
 

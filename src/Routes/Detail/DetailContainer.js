@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DetailPresenter from "./DetailPresenter";
 import { movies, tv } from "../../api";
+import { useApi } from "../../hooks";
 
 export default ({
   location: { pathname },
@@ -8,31 +9,27 @@ export default ({
     params: { id }
   }
 }) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [result, setResult] = useState(null);
-
   const getDetail = async () => {
     const isMovie = pathname.includes("movie");
-    try {
-      let result;
-      if (isMovie) {
-        const { data } = await movies.getMovie(id);
-        result = data;
-      } else {
-        const { data } = await tv.getShow(id);
-        result = data;
-      }
-      setResult(result);
-    } catch {
-      setError("Can't find what you're looking for");
-    } finally {
-      setLoading(false);
+    let result;
+    if (isMovie) {
+      const { data } = await movies.getMovie(id);
+      result = data;
+    } else {
+      const { data } = await tv.getShow(id);
+      result = data;
     }
+    setResult(result);
   };
 
+  const { loading, error, wrappedFn } = useApi({
+    errorMessage: "Can't find what you're looking for",
+    inputFn: getDetail
+  });
+  const [result, setResult] = useState(null);
+
   useEffect(() => {
-    getDetail();
+    wrappedFn();
   }, []);
 
   return <DetailPresenter loading={loading} result={result} error={error} />;
