@@ -4,9 +4,9 @@ export const useApi = ({ initialLoading = true, inputFn, errorMessage }) => {
   const [loading, setLoading] = useState(initialLoading);
   const [error, setError] = useState("");
 
-  const wrappedFn = async () => {
+  const wrappedFn = async (...args) => {
     try {
-      await inputFn();
+      await inputFn(...args);
     } catch (error) {
       setError(errorMessage);
     } finally {

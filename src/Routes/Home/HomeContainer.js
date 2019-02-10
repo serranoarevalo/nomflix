@@ -32,7 +32,7 @@ export default () => {
   });
 
   useEffect(() => {
-    wrappedFn();
+    wrappedFn("dick", true);
   }, []);
 
   return (
